@@ -1,0 +1,38 @@
+<!-- @dsCard group="Colors" viewport="700x180" name="Семантические — статусы" subtitle="Успех, предупреждение, ошибка, инфо (мягкие + сплошные)" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body{ margin:0; padding:22px; background:var(--color-bg); color:var(--color-text); font-family:var(--font-sans); }
+  .grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  .col{ display:flex; flex-direction:column; gap:8px; }
+  .soft{ display:flex; align-items:center; gap:8px; padding:10px 12px; border-radius:10px; font-size:13px; font-weight:600; }
+  .dot{ width:12px; height:12px; border-radius:50%; }
+  .meta{ font-family:var(--font-mono); font-size:10px; color:var(--color-text-muted); display:flex; align-items:center; gap:7px; }
+  .solid{ width:26px; height:14px; border-radius:4px; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="col">
+      <div class="soft" style="background:var(--color-success-bg); color:var(--color-success-fg)"><span class="dot" style="background:var(--color-success)"></span>Успех</div>
+      <div class="meta"><span class="solid" style="background:var(--color-success)"></span>--color-success</div>
+    </div>
+    <div class="col">
+      <div class="soft" style="background:var(--color-warning-bg); color:var(--color-warning-fg)"><span class="dot" style="background:var(--color-warning)"></span>Предупреждение</div>
+      <div class="meta"><span class="solid" style="background:var(--color-warning)"></span>--color-warning</div>
+    </div>
+    <div class="col">
+      <div class="soft" style="background:var(--color-danger-bg); color:var(--color-danger-fg)"><span class="dot" style="background:var(--color-danger)"></span>Ошибка</div>
+      <div class="meta"><span class="solid" style="background:var(--color-danger)"></span>--color-danger</div>
+    </div>
+    <div class="col">
+      <div class="soft" style="background:var(--color-info-bg); color:var(--color-info-fg)"><span class="dot" style="background:var(--color-info)"></span>Инфо</div>
+      <div class="meta"><span class="solid" style="background:var(--color-info)"></span>--color-info</div>
+    </div>
+  </div>
+  <p style="margin:16px 0 0; font-size:12.5px; color:var(--color-text-secondary); max-width:560px; line-height:1.5">Важно: коралл бренда и красный «ошибка» — намеренно разные оттенки. «Ошибка» всегда идёт с иконкой и текстом, никогда не коралл сам по себе.</p>
+</body>
+</html>

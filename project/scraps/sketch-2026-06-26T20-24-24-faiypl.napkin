@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "created": "2026-06-26T20:24:24.875Z",
+  "modified": "2026-06-26T20:39:42.028Z",
+  "objects": [
+    {
+      "id": "u2zlcn0ff",
+      "type": "rect",
+      "x": 117,
+      "y": 242,
+      "width": 160,
+      "height": 143,
+      "data": {
+        "fill": null,
+        "stroke": "#8B2500",
+        "strokeWidth": 2
+      }
+    },
+    {
+      "id": "os682cuut",
+      "type": "text",
+      "x": 134,
+      "y": 282,
+      "data": {
+        "content": "Я (телефон/макбук/апликация/веб )",
+        "fontSize": 16,
+        "color": "#000000",
+        "bold": false
+      },
+      "width": 131,
+      "height": 63
+    }
+  ]
+}

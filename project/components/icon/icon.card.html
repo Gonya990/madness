@@ -1,0 +1,36 @@
+<!-- @dsCard group="Components" viewport="700x250" name="Иконка (Lucide)" subtitle="UniCode использует Lucide, обводка 1.75–2px" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body{ margin:0; padding:22px; background:var(--color-bg); color:var(--color-text); }
+  .d-grid{ display:grid; grid-template-columns:repeat(13, 1fr); gap:14px 10px; }
+  .d-ico{ display:flex; flex-direction:column; align-items:center; gap:6px; color:var(--color-text); }
+  .d-ico small{ font-family:var(--font-mono); font-size:9px; color:var(--color-text-muted); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const NS = window.UniCodeDesignSystem_7662ea;
+const { Icon } = NS;
+const names = ['play','square','folder','file-code','terminal','git-branch','git-commit-horizontal','search','settings','user','bell','rocket','zap','book-open','check','x','plus','trash-2','copy','share-2','download','cloud','database','package','chevron-down','sparkles'];
+function Demo() {
+  return (
+    <div className="d-grid">
+      {names.map((n) => <div className="d-ico" key={n}><Icon name={n} size={22} strokeWidth={1.9} /><small>{n}</small></div>)}
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!-- @dsCard group="Spacing" viewport="700x240" name="Тени" subtitle="Тёплые тени низкой прозрачности" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body{ margin:0; padding:26px; background:var(--color-bg); color:var(--color-text); font-family:var(--font-sans); }
+  .grid{ display:grid; grid-template-columns:repeat(6,1fr); gap:18px; }
+  .item{ display:flex; flex-direction:column; gap:12px; align-items:center; }
+  .card{ width:84px; height:62px; background:var(--color-surface); border-radius:12px; }
+  .lbl{ font-family:var(--font-mono); font-size:11px; color:var(--color-text-secondary); }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="item"><div class="card" style="box-shadow:var(--shadow-xs)"></div><span class="lbl">xs</span></div>
+    <div class="item"><div class="card" style="box-shadow:var(--shadow-sm)"></div><span class="lbl">sm</span></div>
+    <div class="item"><div class="card" style="box-shadow:var(--shadow-md)"></div><span class="lbl">md</span></div>
+    <div class="item"><div class="card" style="box-shadow:var(--shadow-lg)"></div><span class="lbl">lg</span></div>
+    <div class="item"><div class="card" style="box-shadow:var(--shadow-xl)"></div><span class="lbl">xl</span></div>
+    <div class="item"><div class="card" style="box-shadow:var(--shadow-2xl)"></div><span class="lbl">2xl</span></div>
+  </div>
+</body>
+</html>

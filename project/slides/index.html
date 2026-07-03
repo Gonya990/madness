@@ -1,0 +1,230 @@
+<!-- @dsCard group="Slides" viewport="1280x720" name="Шаблон презентации" subtitle="Фирменный дек — титул, разделители, контент, код, метрики, финал" -->
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UniCode — Шаблон презентации</title>
+<link rel="icon" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  deck-stage:not(:defined){ visibility:hidden; }
+  html, body { margin:0; background:#0f0c08; }
+
+  .s{ width:100%; height:100%; box-sizing:border-box; font-family:var(--font-sans); position:relative; overflow:hidden; }
+  .s--light{ background:var(--color-bg); color:var(--color-text); }
+  .s--dark{ background:#1A1611; color:#F3ECDD; }
+  .s--coral{ background:var(--coral-500); color:#fff; }
+  .pad{ padding:120px 130px; height:100%; box-sizing:border-box; display:flex; flex-direction:column; }
+
+  .eyebrow{ font-family:var(--font-mono); font-size:30px; letter-spacing:.18em; text-transform:uppercase; color:var(--coral-500); margin:0 0 36px; }
+  .s--dark .eyebrow{ color:var(--coral-400); }
+  .s--coral .eyebrow{ color:rgba(255,255,255,.8); }
+
+  h1.title{ font-family:var(--font-display); font-weight:700; font-size:150px; line-height:0.96; letter-spacing:-0.035em; margin:0; }
+  h1.title em{ font-style:normal; color:var(--coral-500); }
+  .s--dark h1.title em{ color:var(--coral-400); }
+  h2.head{ font-family:var(--font-display); font-weight:700; font-size:96px; line-height:1.02; letter-spacing:-0.03em; margin:0; }
+  .lead{ font-size:42px; line-height:1.45; color:var(--color-text-secondary); max-width:24ch; margin:0; }
+  .s--dark .lead{ color:#cbbfa6; }
+
+  .brandrow{ display:flex; align-items:center; gap:22px; }
+  .brandrow img{ width:84px; height:84px; }
+  .brandrow .bw{ font-family:var(--font-display); font-weight:700; font-size:52px; letter-spacing:-0.02em; }
+  .brandrow .bw i{ font-style:normal; color:var(--coral-400); }
+
+  .spacer{ flex:1; }
+  .footline{ display:flex; align-items:center; justify-content:space-between; font-family:var(--font-mono); font-size:26px; color:var(--color-text-muted); }
+  .s--dark .footline{ color:#8a7c66; }
+  .s--coral .footline{ color:rgba(255,255,255,.75); }
+
+  /* Титул — код-окно */
+  .winwrap{ position:absolute; right:120px; bottom:120px; width:760px; background:#15110C; border-radius:20px; box-shadow:0 50px 100px rgba(0,0,0,.5); overflow:hidden; }
+  .winbar{ display:flex; gap:11px; padding:20px 22px; background:#221c14; }
+  .windot{ width:17px; height:17px; border-radius:50%; }
+  .wincode{ margin:0; padding:28px 30px; font-family:var(--font-mono); font-size:27px; line-height:1.75; color:#EAE0CE; }
+  .c-k{ color:var(--coral-400); } .c-s{ color:var(--green-400); } .c-f{ color:var(--blue-300); } .c-c{ color:#6e6149; } .c-p{ color:#b7a98f; }
+
+  /* Повестка / список */
+  .agenda{ display:flex; flex-direction:column; gap:30px; margin-top:20px; }
+  .agenda__item{ display:flex; align-items:baseline; gap:34px; padding-bottom:28px; border-bottom:1px solid var(--color-border); }
+  .agenda__num{ font-family:var(--font-mono); font-size:34px; color:var(--coral-500); width:64px; flex:0 0 auto; }
+  .agenda__txt{ font-family:var(--font-display); font-weight:600; font-size:48px; letter-spacing:-0.02em; }
+  .agenda__hint{ margin-left:auto; font-size:28px; color:var(--color-text-muted); align-self:center; }
+
+  /* Контент — фичи */
+  .feat3{ display:grid; grid-template-columns:repeat(3,1fr); gap:34px; margin-top:30px; flex:1; }
+  .featc{ background:var(--color-surface); border:1px solid var(--color-border); border-radius:24px; padding:46px 40px; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; }
+  .featc__ic{ width:88px; height:88px; border-radius:22px; background:var(--coral-50); color:var(--coral-500); display:flex; align-items:center; justify-content:center; margin-bottom:34px; }
+  .featc__ic svg{ width:44px; height:44px; }
+  .featc h3{ font-family:var(--font-display); font-weight:700; font-size:40px; letter-spacing:-0.01em; margin:0 0 16px; }
+  .featc p{ font-size:28px; line-height:1.5; color:var(--color-text-secondary); margin:0; }
+
+  /* Большое утверждение */
+  .statement{ font-family:var(--font-display); font-weight:700; font-size:104px; line-height:1.08; letter-spacing:-0.03em; margin:0; max-width:20ch; }
+  .statement em{ font-style:normal; color:#fff; background:var(--coral-500); padding:0 18px; border-radius:14px; }
+  .s--dark .statement em{ background:var(--coral-500); }
+
+  /* Код-слайд */
+  .codeslide{ display:grid; grid-template-columns:1fr 1.15fr; gap:80px; align-items:center; flex:1; }
+  .codeslide .lead{ font-size:38px; }
+  .bigwin{ background:#15110C; border-radius:22px; box-shadow:0 50px 100px rgba(0,0,0,.5); overflow:hidden; }
+  .bigwin .wincode{ font-size:30px; }
+
+  /* Метрики */
+  .metrics{ display:grid; grid-template-columns:repeat(2,1fr); gap:60px 80px; margin-top:40px; flex:1; align-content:center; }
+  .metric__num{ font-family:var(--font-display); font-weight:700; font-size:130px; line-height:1; letter-spacing:-0.04em; color:var(--coral-500); }
+  .s--dark .metric__num{ color:var(--coral-400); }
+  .metric__lbl{ font-size:34px; color:var(--color-text-secondary); margin-top:8px; }
+  .s--dark .metric__lbl{ color:#cbbfa6; }
+
+  /* Большой номер раздела */
+  .bignum{ font-family:var(--font-mono); font-size:60px; opacity:.6; margin:0 0 20px; }
+  .s--coral .lead{ color:rgba(255,255,255,.9); max-width:26ch; margin-top:30px; }
+
+  /* CTA финал */
+  .cta-pill{ display:inline-flex; align-items:center; gap:18px; background:var(--coral-500); color:#fff; font-family:var(--font-display); font-weight:600; font-size:42px; padding:28px 46px; border-radius:18px; margin-top:20px; }
+  .cta-pill svg{ width:38px; height:38px; }
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 1 · Титул -->
+  <section data-label="Титул" class="s s--dark">
+    <div class="pad">
+      <div class="brandrow anim"><img src="../assets/logo-mark.svg" alt="UniCode"><span class="bw">Uni<i>Code</i></span></div>
+      <div class="spacer"></div>
+      <p class="eyebrow anim">Универсальная платформа для кода</p>
+      <h1 class="title anim2">Пиши. Запускай.<br><em>Деплой.</em></h1>
+      <div class="spacer"></div>
+      <div class="footline"><span>Презентация продукта · 2026</span><span>unicode.dev</span></div>
+    </div>
+    <div class="winwrap anim2">
+      <div class="winbar"><span class="windot" style="background:#F4522D"></span><span class="windot" style="background:#E8A23D"></span><span class="windot" style="background:#1F9D55"></span></div>
+      <pre class="wincode"><span class="c-c">// деплой в один шаг</span>
+<span class="c-k">await</span> <span class="c-f">uni</span>.<span class="c-f">deploy</span>(<span class="c-s">'prod'</span>);
+<span class="c-c">// ✓ за 4.2с</span></pre>
+    </div>
+  </section>
+
+  <!-- 2 · Повестка -->
+  <section data-label="Повестка" class="s s--light">
+    <div class="pad">
+      <p class="eyebrow anim">Сегодня</p>
+      <div class="agenda anim2">
+        <div class="agenda__item"><span class="agenda__num">01</span><span class="agenda__txt">Проблема окружения</span><span class="agenda__hint">почему это медленно</span></div>
+        <div class="agenda__item"><span class="agenda__num">02</span><span class="agenda__txt">Редактор в браузере</span><span class="agenda__hint">в один клик</span></div>
+        <div class="agenda__item"><span class="agenda__num">03</span><span class="agenda__txt">Совместная работа и деплой</span><span class="agenda__hint">вместе с командой</span></div>
+        <div class="agenda__item"><span class="agenda__num">04</span><span class="agenda__txt">Цифры и дорожная карта</span><span class="agenda__hint">что дальше</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Разделитель -->
+  <section data-label="Раздел 01" class="s s--coral">
+    <div class="pad">
+      <p class="bignum anim">01</p>
+      <div class="spacer"></div>
+      <h2 class="head anim2">Окружение крадёт время</h2>
+      <p class="lead anim2">Установка, версии, «у меня работает». Разработчик тратит часы до первой строки кода.</p>
+      <div class="spacer"></div>
+      <div class="footline"><span>UniCode</span><span>01 / 04</span></div>
+    </div>
+  </section>
+
+  <!-- 4 · Утверждение -->
+  <section data-label="Утверждение" class="s s--dark">
+    <div class="pad" style="justify-content:center">
+      <p class="eyebrow anim">Наш принцип</p>
+      <p class="statement anim2">Между идеей и кодом не должно быть <em>настройки</em>.</p>
+    </div>
+  </section>
+
+  <!-- 5 · Контент: фичи -->
+  <section data-label="Возможности" class="s s--light">
+    <div class="pad">
+      <p class="eyebrow anim">Что внутри</p>
+      <h2 class="head anim" style="font-size:74px">Всё для разработки — в одной вкладке</h2>
+      <div class="feat3 anim2">
+        <div class="featc">
+          <div class="featc__ic"><i data-lucide="mouse-pointer-click"></i></div>
+          <h3>Редактор в один клик</h3>
+          <p>Полноценная IDE в браузере: файлы, терминал, live-превью. Без установки.</p>
+        </div>
+        <div class="featc">
+          <div class="featc__ic"><i data-lucide="users"></i></div>
+          <h3>Совместно</h3>
+          <p>Курсоры, комментарии и ревью в реальном времени — встроены.</p>
+        </div>
+        <div class="featc">
+          <div class="featc__ic"><i data-lucide="rocket"></i></div>
+          <h3>Деплой за секунды</h3>
+          <p>Из редактора в продакшен. Превью-окружение на каждый пуш.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · Код-слайд -->
+  <section data-label="Код" class="s s--light">
+    <div class="pad">
+      <div class="codeslide">
+        <div>
+          <p class="eyebrow anim">Опыт разработчика</p>
+          <h2 class="head anim" style="font-size:72px">Один SDK.<br>Любой стек.</h2>
+          <p class="lead anim2" style="margin-top:30px">Пишите обработчик, сохраняйте — сервер перезагружается мгновенно.</p>
+        </div>
+        <div class="bigwin anim2">
+          <div class="winbar"><span class="windot" style="background:#F4522D"></span><span class="windot" style="background:#E8A23D"></span><span class="windot" style="background:#1F9D55"></span></div>
+          <pre class="wincode"><span class="c-k">import</span> { serve } <span class="c-k">from</span> <span class="c-s">'@unicode/sdk'</span>;
+
+<span class="c-f">serve</span>({ port: <span class="c-p">8080</span> }, <span class="c-k">async</span> (req) => {
+  <span class="c-c">// правьте и сохраняйте</span>
+  <span class="c-k">const</span> user = <span class="c-k">await</span> db.<span class="c-f">find</span>(req.id);
+  <span class="c-k">return</span> Response.<span class="c-f">json</span>(user);
+});</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · Метрики -->
+  <section data-label="Метрики" class="s s--dark">
+    <div class="pad">
+      <p class="eyebrow anim">UniCode в цифрах</p>
+      <div class="metrics anim2">
+        <div><div class="metric__num">2 млн+</div><div class="metric__lbl">разработчиков на платформе</div></div>
+        <div><div class="metric__num">40+</div><div class="metric__lbl">поддерживаемых сред</div></div>
+        <div><div class="metric__num">4.2с</div><div class="metric__lbl">среднее время сборки</div></div>
+        <div><div class="metric__num">99.98%</div><div class="metric__lbl">аптайм за год</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · Финал -->
+  <section data-label="Финал" class="s s--dark">
+    <div class="pad">
+      <div class="brandrow anim"><img src="../assets/logo-mark.svg" alt="UniCode"><span class="bw">Uni<i>Code</i></span></div>
+      <div class="spacer"></div>
+      <h2 class="head anim2" style="font-size:108px">Откройте редактор.<br>Прямо сейчас.</h2>
+      <div class="cta-pill anim2"><i data-lucide="play"></i> unicode.dev</div>
+      <div class="spacer"></div>
+      <div class="footline"><span>Спасибо</span><span>Пиши. Запускай. Деплой.</span></div>
+    </div>
+  </section>
+
+</deck-stage>
+
+<script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js"></script>
+<script src="deck-stage.js"></script>
+<script>
+  const paint = () => { if (window.lucide) lucide.createIcons(); else setTimeout(paint, 40); };
+  paint();
+  document.querySelector('deck-stage').addEventListener('slidechange', () => setTimeout(() => window.lucide && lucide.createIcons(), 20));
+</script>
+</body>
+</html>

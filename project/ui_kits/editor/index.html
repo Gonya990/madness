@@ -1,0 +1,123 @@
+<!-- @dsCard group="Редактор" viewport="1280x800" name="Редактор / Плейграунд" subtitle="Браузерная IDE — дерево файлов, редактор, консоль, превью" -->
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UniCode — Редактор</title>
+<link rel="icon" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  html, body { margin:0; height:100%; background:#15110C; }
+  #root { height:100vh; }
+
+  /* Espresso-тёмная тема для всей IDE */
+  .ed-root{
+    height:100vh; display:grid; grid-template-rows:48px 1fr 26px;
+    background:#1A1611; color:#F3ECDD; font-family:var(--font-sans);
+    --b:#2A2218; --b2:#352B1F; --bg2:#221D16; --mut:#9b8e79;
+  }
+
+  /* ---------- Верхняя панель ---------- */
+  .ed-topbar{ display:flex; align-items:center; gap:16px; padding:0 12px; background:#1F1A13; border-bottom:1px solid var(--b); }
+  .ed-topbar__left{ display:flex; align-items:center; gap:12px; }
+  .ed-proj{ display:flex; align-items:center; gap:10px; }
+  .ed-proj__btn{ display:inline-flex; align-items:center; gap:6px; background:transparent; border:none; color:#F3ECDD; font-family:var(--font-display); font-weight:600; font-size:15px; cursor:pointer; padding:4px 6px; border-radius:7px; white-space:nowrap; }
+  .ed-proj__btn:hover{ background:var(--bg2); }
+  .ed-topbar__center{ flex:1; display:flex; justify-content:center; }
+  .ed-omni{ display:inline-flex; align-items:center; gap:8px; background:#15110C; border:1px solid var(--b); color:var(--mut); font-size:13px; padding:6px 12px; border-radius:8px; min-width:280px; white-space:nowrap; }
+  .ed-omni__hint{ margin-left:auto; font-family:var(--font-mono); font-size:11px; background:var(--bg2); padding:1px 6px; border-radius:5px; }
+  .ed-topbar__right{ display:flex; align-items:center; gap:8px; }
+  .ed-share{ display:flex; align-items:center; gap:10px; margin-left:6px; padding-left:12px; border-left:1px solid var(--b); }
+  .ed-collab{ display:flex; }
+  .ed-collab > *:not(:first-child){ margin-left:-8px; }
+  .ed-collab :where(span){ box-shadow:0 0 0 2px #1F1A13; }
+
+  /* ---------- Тело ---------- */
+  .ed-body{ display:grid; grid-template-columns:52px 234px 1fr 384px; min-height:0; }
+
+  /* Активность */
+  .ed-activity{ background:#15110C; border-right:1px solid var(--b); display:flex; flex-direction:column; justify-content:space-between; padding:8px 0; }
+  .ed-activity__top, .ed-activity__bot{ display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .ed-act{ width:40px; height:40px; display:inline-flex; align-items:center; justify-content:center; background:transparent; border:none; color:var(--mut); cursor:pointer; border-radius:9px; position:relative; transition:color .12s, background .12s; }
+  .ed-act:hover{ color:#F3ECDD; background:var(--bg2); }
+  .ed-act.is-active{ color:var(--coral-400); }
+  .ed-act.is-active::before{ content:""; position:absolute; left:-8px; top:9px; bottom:9px; width:3px; border-radius:0 3px 3px 0; background:var(--coral-500); }
+
+  /* Сайдбар */
+  .ed-sidebar{ background:#1A1611; border-right:1px solid var(--b); display:flex; flex-direction:column; min-height:0; }
+  .ed-sidebar__head{ display:flex; align-items:center; justify-content:space-between; padding:11px 8px 8px 14px; font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--mut); }
+  .ed-sidebar__head .uc-iconbtn{ color:var(--mut); }
+  .ed-sidebar__head .uc-iconbtn:hover{ background:var(--bg2); color:#F3ECDD; }
+  .ed-sidebar__project{ display:flex; align-items:center; gap:6px; padding:6px 14px; font-family:var(--font-display); font-size:12px; letter-spacing:.04em; color:#cbbfa6; }
+  .ed-tree{ overflow-y:auto; padding:2px 6px 12px; }
+  .ed-row{ display:flex; align-items:center; gap:7px; width:100%; background:transparent; border:none; color:#d7ccb6; font-family:var(--font-sans); font-size:13px; cursor:pointer; padding:5px 8px; border-radius:7px; text-align:left; }
+  .ed-row:hover{ background:var(--bg2); }
+  .ed-row .uc-icon:first-child{ color:var(--mut); }
+  .ed-row--file.is-active{ background:#2a2117; color:#fff; }
+  .ed-row--file.is-active .uc-icon{ color:var(--coral-400); }
+
+  /* Редактор */
+  .ed-main{ display:flex; flex-direction:column; min-width:0; background:#15110C; }
+  .ed-tabs{ display:flex; align-items:stretch; background:#1A1611; border-bottom:1px solid var(--b); height:40px; }
+  .ed-tab{ display:inline-flex; align-items:center; gap:8px; padding:0 12px; font-size:13px; color:var(--mut); cursor:pointer; border-right:1px solid var(--b); position:relative; white-space:nowrap; }
+  .ed-tab:hover{ color:#e7dcc8; }
+  .ed-tab.is-active{ background:#15110C; color:#fff; }
+  .ed-tab.is-active::before{ content:""; position:absolute; top:0; left:0; right:0; height:2px; background:var(--coral-500); }
+  .ed-tab__x{ display:inline-flex; background:transparent; border:none; color:inherit; cursor:pointer; opacity:.55; padding:2px; border-radius:4px; }
+  .ed-tab__x:hover{ opacity:1; background:var(--b2); }
+  .ed-tabs__spacer{ flex:1; }
+  .ed-tabs__actions{ display:flex; align-items:center; padding:0 6px; }
+  .ed-tabs__actions .uc-iconbtn{ color:var(--mut); }
+  .ed-breadcrumb{ display:flex; align-items:center; gap:6px; padding:6px 16px; font-size:12px; color:var(--mut); background:#15110C; border-bottom:1px solid #1f1810; }
+  .ed-breadcrumb .is-file{ color:#d7ccb6; }
+  .ed-code{ flex:1; min-height:0; }
+  /* Делаем CodeBlock «вровень», без рамок и скруглений, на всю высоту */
+  .ed-code .uc-code{ border:0; border-radius:0; height:100%; background:#15110C; }
+  .ed-code .uc-code__scroll{ height:100%; }
+  .ed-code .uc-code__pre{ font-size:13.5px; line-height:1.65; }
+
+  /* Правая панель */
+  .ed-right{ background:#1A1611; border-left:1px solid var(--b); display:flex; flex-direction:column; min-width:0; }
+  .ed-right__head{ display:flex; align-items:center; justify-content:space-between; padding:8px 10px; border-bottom:1px solid var(--b); }
+  .ed-right__head .uc-iconbtn{ color:var(--mut); }
+  .ed-right__body{ flex:1; min-height:0; padding:12px; overflow:auto; }
+  .ed-right__body .uc-term{ box-shadow:none; }
+
+  .ed-preview{ height:100%; display:flex; flex-direction:column; border:1px solid var(--b); border-radius:10px; overflow:hidden; background:#fff; }
+  .ed-preview__bar{ display:flex; align-items:center; gap:8px; padding:7px 10px; background:#f4eee3; border-bottom:1px solid #e3d8c4; }
+  .ed-preview__url{ flex:1; display:flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; color:#75654e; background:#fff; padding:4px 9px; border-radius:6px; border:1px solid #e3d8c4; }
+  .ed-preview__bar .uc-iconbtn{ color:#75654e; }
+  .ed-preview__page{ flex:1; padding:18px; color:#261e16; }
+  .ed-preview__badge{ display:inline-block; font-size:12px; font-weight:600; color:var(--green-600); background:var(--green-50); padding:4px 10px; border-radius:999px; margin-bottom:14px; }
+  .ed-preview__json{ margin:0; font-family:var(--font-mono); font-size:12.5px; line-height:1.7; color:#3a2f25; }
+
+  /* Статусбар */
+  .ed-status{ display:flex; align-items:center; justify-content:space-between; padding:0 12px; background:var(--coral-600); color:#fff; font-size:12px; }
+  .ed-status__left, .ed-status__right{ display:flex; align-items:center; gap:14px; }
+  .ed-status__item{ display:inline-flex; align-items:center; gap:5px; opacity:.96; }
+
+  /* Тонкий тёплый скроллбар */
+  ::-webkit-scrollbar{ width:11px; height:11px; }
+  ::-webkit-scrollbar-thumb{ background:#3a2f22; border-radius:6px; border:3px solid transparent; background-clip:content-box; }
+  ::-webkit-scrollbar-thumb:hover{ background:#4a3c2c; border:3px solid transparent; background-clip:content-box; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="EditorApp.jsx"></script>
+<script type="text/babel">
+  const mount = () => {
+    if (!window.EditorApp || !window.UniCodeDesignSystem_7662ea) { return setTimeout(mount, 30); }
+    const App = window.EditorApp;
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  };
+  mount();
+</script>
+</body>
+</html>

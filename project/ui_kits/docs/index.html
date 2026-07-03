@@ -1,0 +1,102 @@
+<!-- @dsCard group="Документация" viewport="1280x900" name="Документация" subtitle="Док-сайт — сайдбар, контент с кодом, оглавление" -->
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UniCode — Документация</title>
+<link rel="icon" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  html, body { margin:0; height:100%; }
+  body { background:var(--color-bg); }
+  #root { height:100vh; }
+  .dc-root{ height:100vh; display:flex; flex-direction:column; color:var(--color-text); font-family:var(--font-sans); }
+
+  /* Верхняя панель */
+  .dc-top{ display:flex; align-items:center; gap:20px; padding:11px 24px; border-bottom:1px solid var(--color-border); background:var(--color-surface); flex:0 0 auto; }
+  .dc-brand{ display:flex; align-items:center; gap:8px; text-decoration:none; color:var(--color-text); }
+  .dc-brand span{ font-family:var(--font-display); font-weight:700; font-size:18px; letter-spacing:-0.02em; }
+  .dc-brand i{ font-style:normal; color:var(--color-primary); }
+  .dc-docs-tag{ font-family:var(--font-mono)!important; font-size:11px!important; font-weight:500!important; letter-spacing:.06em; color:var(--color-text-muted)!important; border-left:1px solid var(--color-border); padding-left:8px; }
+  .dc-top__search{ position:relative; flex:1; max-width:440px; margin:0 auto; display:flex; align-items:center; }
+  .dc-kbd{ position:absolute; right:8px; display:flex; gap:3px; pointer-events:none; }
+  .dc-top__right{ display:flex; align-items:center; gap:10px; }
+  .dc-ver{ font-family:var(--font-mono); font-size:12px; color:var(--color-text-secondary); background:var(--color-surface-2); border:1px solid var(--color-border); border-radius:7px; padding:5px 8px; cursor:pointer; }
+  .dc-top__link{ font-size:14px; color:var(--color-text-secondary); text-decoration:none; font-weight:500; }
+  .dc-top__link:hover{ color:var(--color-text); }
+
+  /* Тело */
+  .dc-body{ flex:1; display:grid; grid-template-columns:248px 1fr 220px; min-height:0; }
+
+  /* Сайдбар */
+  .dc-side{ border-right:1px solid var(--color-border); overflow-y:auto; padding:22px 14px; }
+  .dc-side__group{ margin-bottom:22px; }
+  .dc-side__h{ font-size:12px; font-weight:700; letter-spacing:.04em; color:var(--color-text); text-transform:uppercase; padding:0 10px 8px; }
+  .dc-side__item{ display:block; width:100%; text-align:left; background:transparent; border:none; cursor:pointer; font-family:var(--font-sans); font-size:14px; color:var(--color-text-secondary); padding:7px 10px; border-radius:8px; border-left:2px solid transparent; }
+  .dc-side__item:hover{ background:var(--color-surface-2); color:var(--color-text); }
+  .dc-side__item.is-active{ color:var(--color-primary); background:var(--color-primary-subtle); font-weight:600; }
+
+  /* Контент */
+  .dc-content{ overflow-y:auto; padding:32px 56px 80px; max-width:780px; }
+  .dc-crumbs{ display:flex; align-items:center; gap:7px; font-size:13px; color:var(--color-text-muted); margin-bottom:18px; }
+  .dc-crumbs a{ color:var(--color-text-secondary); text-decoration:none; }
+  .dc-content h1{ font-family:var(--font-display); font-size:38px; font-weight:700; letter-spacing:-0.025em; margin:0 0 12px; }
+  .dc-lead{ font-size:18px; line-height:1.6; color:var(--color-text-secondary); margin:0 0 24px; }
+  .dc-content h2{ font-family:var(--font-display); font-size:24px; font-weight:700; letter-spacing:-0.015em; margin:38px 0 12px; padding-top:10px; }
+  .dc-content h3{ font-family:var(--font-display); font-size:18px; font-weight:600; margin:26px 0 10px; }
+  .dc-content p{ font-size:15.5px; line-height:1.7; color:var(--color-text); margin:0 0 16px; }
+  .dc-content code{ font-family:var(--font-mono); font-size:0.86em; background:var(--color-surface-2); border:1px solid var(--color-border); padding:1.5px 5px; border-radius:5px; color:var(--coral-700); }
+  .dc-content .uc-code{ margin:0 0 20px; }
+  .dc-content .uc-alert{ margin:0 0 20px; }
+
+  /* Карточки «что дальше» */
+  .dc-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:12px 0 28px; }
+  .dc-next{ display:flex; flex-direction:column; gap:5px; padding:16px; border:1px solid var(--color-border); border-radius:12px; text-decoration:none; color:var(--color-text); background:var(--color-surface); transition:border-color var(--dur-base), box-shadow var(--dur-base), transform var(--dur-base); }
+  .dc-next:hover{ border-color:var(--color-primary); box-shadow:var(--shadow-md); transform:translateY(-2px); }
+  .dc-next .uc-icon{ color:var(--color-primary); }
+  .dc-next strong{ font-family:var(--font-display); font-size:14px; }
+  .dc-next span{ font-size:12.5px; color:var(--color-text-secondary); line-height:1.4; }
+  .dc-next code{ font-size:11px; }
+
+  /* Пейджер */
+  .dc-pager{ display:flex; justify-content:space-between; gap:14px; margin-top:36px; padding-top:24px; border-top:1px solid var(--color-border); }
+  .dc-pager__btn{ display:flex; flex-direction:column; gap:4px; padding:14px 18px; border:1px solid var(--color-border); border-radius:12px; text-decoration:none; min-width:200px; }
+  .dc-pager__btn:hover{ border-color:var(--color-primary); }
+  .dc-pager__btn span{ font-size:12px; color:var(--color-text-muted); display:inline-flex; align-items:center; gap:5px; }
+  .dc-pager__btn strong{ font-family:var(--font-display); font-size:15px; color:var(--color-text); }
+  .dc-pager__btn--next{ text-align:right; }
+  .dc-pager__btn--next span{ justify-content:flex-end; }
+
+  /* Оглавление */
+  .dc-toc{ border-left:1px solid var(--color-border); overflow-y:auto; padding:32px 20px; }
+  .dc-toc__h{ font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--color-text); margin-bottom:12px; }
+  .dc-toc__item{ display:block; font-size:13px; color:var(--color-text-secondary); text-decoration:none; padding:5px 0 5px 12px; border-left:2px solid var(--color-border); }
+  .dc-toc__item.is-sub{ padding-left:24px; }
+  .dc-toc__item:hover{ color:var(--color-text); }
+  .dc-toc__item.is-active{ color:var(--color-primary); border-left-color:var(--color-primary); font-weight:600; }
+  .dc-toc__foot{ margin-top:22px; padding-top:16px; border-top:1px solid var(--color-border); display:flex; flex-direction:column; gap:9px; }
+  .dc-toc__foot a{ display:inline-flex; align-items:center; gap:7px; font-size:13px; color:var(--color-text-secondary); text-decoration:none; }
+  .dc-toc__foot a:hover{ color:var(--color-primary); }
+
+  @media (max-width:1140px){ .dc-body{ grid-template-columns:240px 1fr; } .dc-toc{ display:none; } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="DocsApp.jsx"></script>
+<script type="text/babel">
+  const mount = () => {
+    if (!window.DocsApp || !window.UniCodeDesignSystem_7662ea) { return setTimeout(mount, 30); }
+    const App = window.DocsApp;
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  };
+  mount();
+</script>
+</body>
+</html>

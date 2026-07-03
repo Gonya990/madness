@@ -1,0 +1,32 @@
+<!-- @dsCard group="Colors" viewport="700x230" name="Код / синтаксис" subtitle="Палитра подсветки, светлая и тёмная" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body{ margin:0; padding:22px; background:var(--color-bg); color:var(--color-text); font-family:var(--font-sans); }
+  .wrap{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  pre{ margin:0; background:var(--code-bg); color:var(--code-fg); border:1px solid var(--color-border); border-radius:12px; padding:14px 16px; font-family:var(--font-mono); font-size:12.5px; line-height:1.7; overflow:auto; }
+  .k{ color:var(--code-keyword); } .s{ color:var(--code-string); } .n{ color:var(--code-number); }
+  .f{ color:var(--code-function); } .c{ color:var(--code-comment); } .p{ color:var(--code-punct); }
+  .cap{ font-family:var(--font-mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--color-text-muted); margin:0 0 7px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div>
+      <p class="cap">Светлая</p>
+      <pre><span class="c">// получаем пользователя</span>
+<span class="k">const</span> user <span class="p">=</span> <span class="k">await</span> <span class="f">getUser</span><span class="p">(</span><span class="n">42</span><span class="p">);</span>
+<span class="k">return</span> <span class="p">{</span> name<span class="p">:</span> <span class="s">"Ada"</span> <span class="p">};</span></pre>
+    </div>
+    <div class="dark">
+      <p class="cap">Тёмная</p>
+      <pre><span class="c">// получаем пользователя</span>
+<span class="k">const</span> user <span class="p">=</span> <span class="k">await</span> <span class="f">getUser</span><span class="p">(</span><span class="n">42</span><span class="p">);</span>
+<span class="k">return</span> <span class="p">{</span> name<span class="p">:</span> <span class="s">"Ada"</span> <span class="p">};</span></pre>
+    </div>
+  </div>
+</body>
+</html>

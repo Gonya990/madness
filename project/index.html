@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UniCode — Дизайн-система</title>
+<link rel="icon" href="assets/favicon.svg">
+<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  body{ margin:0; background:var(--color-bg); color:var(--color-text); font-family:var(--font-sans); -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 24px; }
+  a{ color:inherit; }
+
+  /* nav */
+  .nav{ position:sticky; top:0; z-index:10; backdrop-filter:saturate(1.2) blur(8px); background:color-mix(in srgb, var(--color-bg) 82%, transparent); border-bottom:1px solid var(--color-border); }
+  .nav-in{ max-width:1080px; margin:0 auto; padding:13px 24px; display:flex; align-items:center; gap:14px; }
+  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .word{ font-family:var(--font-display); font-weight:700; font-size:20px; letter-spacing:-0.02em; color:var(--color-text); }
+  .word i{ font-style:normal; color:var(--color-primary); }
+  .pill{ font-family:var(--font-mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-text-secondary); background:var(--color-surface-2); border:1px solid var(--color-border); padding:3px 8px; border-radius:999px; }
+  .nav-right{ margin-left:auto; display:flex; align-items:center; gap:6px; }
+  .nav-right a{ font-size:14px; font-weight:500; color:var(--color-text-secondary); text-decoration:none; padding:7px 11px; border-radius:8px; }
+  .nav-right a:hover{ color:var(--color-text); background:var(--color-surface-2); }
+  .tbtn{ width:34px; height:34px; border-radius:8px; border:1px solid var(--color-border-strong); background:var(--color-surface); color:var(--color-text); cursor:pointer; font-size:15px; }
+  .tbtn:hover{ background:var(--color-bg-subtle); }
+
+  /* hero */
+  .hero{ display:grid; grid-template-columns:1.05fr 1fr; gap:40px; align-items:center; padding:64px 0 48px; }
+  .eyebrow{ font-family:var(--font-mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--color-primary); margin-bottom:18px; }
+  .hero h1{ font-family:var(--font-display); font-weight:700; font-size:clamp(40px,5.4vw,64px); line-height:1.0; letter-spacing:-0.03em; margin:0 0 18px; }
+  .hero h1 em{ font-style:normal; color:var(--color-primary); }
+  .lead{ font-size:18px; line-height:1.6; color:var(--color-text-secondary); max-width:32em; margin:0 0 24px; }
+  .chips{ display:flex; gap:8px; }
+  .chips span{ font-family:var(--font-mono); font-size:12px; color:var(--color-text-secondary); background:var(--color-surface); border:1px solid var(--color-border); padding:6px 12px; border-radius:999px; }
+
+  /* code window */
+  .codewin{ background:var(--code-bg); border-radius:14px; box-shadow:var(--shadow-xl); overflow:hidden; }
+  .cw-bar{ display:flex; align-items:center; gap:7px; padding:11px 14px; background:#1d1710; }
+  .cw-bar i{ width:11px; height:11px; border-radius:50%; display:block; }
+  .cw-title{ margin-left:8px; font-family:var(--font-sans); font-size:12px; color:#9b8e79; }
+  .cw-body{ margin:0; padding:16px 18px; font-family:var(--font-mono); font-size:13px; line-height:1.75; color:var(--code-fg); overflow:auto; }
+  .k{ color:var(--code-keyword); } .s{ color:var(--code-string); } .n{ color:var(--code-number); }
+  .f{ color:var(--code-function); } .c{ color:var(--code-comment); } .p{ color:var(--code-punct); }
+
+  /* sections */
+  section.block{ padding:30px 0; border-top:1px solid var(--color-border); }
+  .h-lbl{ font-family:var(--font-mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-muted); margin:0 0 18px; }
+
+  .pal{ display:flex; gap:10px; flex-wrap:wrap; }
+  .pchip{ display:flex; flex-direction:column; gap:7px; }
+  .pchip .sw{ width:84px; height:56px; border-radius:10px; border:1px solid rgba(40,26,12,.08); }
+  .pchip b{ font-size:12px; }
+  .pchip code{ font-family:var(--font-mono); font-size:10px; color:var(--color-text-muted); }
+
+  .types{ display:flex; flex-direction:column; gap:14px; }
+  .types div{ display:flex; align-items:baseline; gap:16px; }
+  .types .meta{ margin-left:auto; font-family:var(--font-mono); font-size:11px; color:var(--color-text-muted); }
+
+  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .tile{ display:block; text-decoration:none; background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; padding:16px; box-shadow:var(--shadow-xs); transition:transform var(--dur-base) var(--ease-standard), box-shadow var(--dur-base), border-color var(--dur-base); }
+  .tile:hover{ transform:translateY(-2px); box-shadow:var(--shadow-lg); border-color:var(--color-border-strong); }
+  .tile .t-grp{ font-family:var(--font-mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-primary); }
+  .tile .t-name{ font-family:var(--font-display); font-weight:600; font-size:17px; color:var(--color-text); margin:6px 0 4px; letter-spacing:-0.01em; }
+  .tile .t-desc{ font-size:13px; color:var(--color-text-secondary); line-height:1.45; }
+
+  footer{ padding:34px 0 60px; border-top:1px solid var(--color-border); color:var(--color-text-secondary); font-size:13.5px; line-height:1.6; }
+  footer code{ font-family:var(--font-mono); font-size:12px; background:var(--color-surface-2); padding:2px 6px; border-radius:6px; color:var(--color-text); }
+  .flag{ display:flex; gap:9px; align-items:flex-start; margin-top:10px; }
+  .flag b{ color:var(--color-text); }
+
+  @media (max-width:780px){ .hero{ grid-template-columns:1fr; gap:28px; padding:40px 0 32px; } .grid{ grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body id="top">
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top">
+      <img src="assets/logo-mark.svg" width="30" height="30" alt="UniCode">
+      <span class="word">Uni<i>Code</i></span>
+      <span class="pill">Дизайн-система</span>
+    </a>
+    <div class="nav-right">
+      <a href="readme.md">Руководство</a>
+      <a href="https://lucide.dev" target="_blank" rel="noopener">Иконки</a>
+      <button class="tbtn" id="theme" aria-label="Переключить тёмную тему" title="Переключить тёмную тему">◐</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Универсальная платформа для кода</div>
+      <h1>Пиши. Запускай. <em>Деплой.</em></h1>
+      <p class="lead">Тёплая дизайн-система для разработчиков — токены, 25 компонентов и продуктовые киты, чтобы писать, запускать и деплоить код вместе.</p>
+      <div class="chips"><span>Код</span><span>Запуск</span><span>Деплой</span></div>
+    </div>
+    <div class="codewin dark">
+      <div class="cw-bar"><i style="background:#F4522D"></i><i style="background:#E8A23D"></i><i style="background:#1F9D55"></i><span class="cw-title">server.ts</span></div>
+      <pre class="cw-body"><span class="c">// Стримим токены обратно клиенту</span>
+<span class="k">import</span> <span class="p">{</span> serve <span class="p">}</span> <span class="k">from</span> <span class="s">'@unicode/sdk'</span><span class="p">;</span>
+
+<span class="f">serve</span><span class="p">(</span><span class="k">async</span> <span class="p">(</span>req<span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="p">{</span> prompt <span class="p">}</span> <span class="p">=</span> <span class="k">await</span> req<span class="p">.</span><span class="f">json</span><span class="p">();</span>
+  <span class="k">return</span> <span class="f">run</span><span class="p">(</span><span class="s">'gpt'</span><span class="p">,</span> prompt<span class="p">,</span> <span class="p">{</span> stream<span class="p">:</span> <span class="k">true</span> <span class="p">});</span>
+<span class="p">});</span></pre>
+    </div>
+  </section>
+
+  <section class="block">
+    <p class="h-lbl">Палитра</p>
+    <div class="pal">
+      <div class="pchip"><span class="sw" style="background:var(--coral-500)"></span><b>Коралл</b><code>#F4522D · основной</code></div>
+      <div class="pchip"><span class="sw" style="background:var(--amber-400)"></span><b>Янтарь</b><code>#E8A23D · акцент</code></div>
+      <div class="pchip"><span class="sw" style="background:var(--blue-500)"></span><b>Синий</b><code>#2C6FCB · ссылки</code></div>
+      <div class="pchip"><span class="sw" style="background:var(--green-500)"></span><b>Зелёный</b><code>#1F9D55 · успех</code></div>
+      <div class="pchip"><span class="sw" style="background:var(--red-500)"></span><b>Красный</b><code>#D92D20 · ошибка</code></div>
+      <div class="pchip"><span class="sw" style="background:var(--sand-100); border-color:var(--color-border-strong)"></span><b>Песок 100</b><code>поверхность</code></div>
+      <div class="pchip"><span class="sw" style="background:var(--sand-900)"></span><b>Песок 900</b><code>текст</code></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <p class="h-lbl">Шрифты</p>
+    <div class="types">
+      <div><span style="font-family:var(--font-display); font-weight:700; font-size:34px; letter-spacing:-0.02em">Space Grotesk</span><span class="meta">Заголовки</span></div>
+      <div><span style="font-family:var(--font-sans); font-weight:500; font-size:22px">Hanken Grotesk — чёткий, тёплый основной текст</span><span class="meta">Текст · база 15px</span></div>
+      <div><span style="font-family:var(--font-mono); font-size:18px">JetBrains Mono — uni deploy --prod</span><span class="meta">Код</span></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <p class="h-lbl">Изучить систему</p>
+    <div class="grid">
+      <a class="tile" href="guidelines/colors-primary.card.html"><div class="t-grp">Основы</div><div class="t-name">Цвет</div><div class="t-desc">Тёплая палитра, семантические токены и подсветка кода.</div></a>
+      <a class="tile" href="guidelines/type-scale.card.html"><div class="t-grp">Основы</div><div class="t-name">Шрифты</div><div class="t-desc">Три семейства, шкала 2xs→6xl.</div></a>
+      <a class="tile" href="guidelines/spacing.card.html"><div class="t-grp">Основы</div><div class="t-name">Отступы и радиусы</div><div class="t-desc">Сетка 4px, мягкие углы, тёплые тени.</div></a>
+      <a class="tile" href="components/actions/actions.card.html"><div class="t-grp">Компоненты</div><div class="t-name">Кнопки</div><div class="t-desc">Основная, вторичная, призрачная, опасная.</div></a>
+      <a class="tile" href="components/forms/forms.card.html"><div class="t-grp">Компоненты</div><div class="t-name">Поля формы</div><div class="t-desc">Поля ввода, селекты, чекбоксы, переключатели.</div></a>
+      <a class="tile" href="components/feedback/feedback.card.html"><div class="t-grp">Компоненты</div><div class="t-name">Обратная связь</div><div class="t-desc">Бейджи, алерты, тосты, прогресс.</div></a>
+      <a class="tile" href="components/code/code.card.html"><div class="t-grp">Компоненты</div><div class="t-name">Код и Терминал</div><div class="t-desc">Фирменные поверхности UniCode.</div></a>
+      <a class="tile" href="components/navigation/navigation.card.html"><div class="t-grp">Компоненты</div><div class="t-name">Навигация</div><div class="t-desc">Табы, меню, хлебные крошки.</div></a>
+      <a class="tile" href="components/data-display/data-display.card.html"><div class="t-grp">Компоненты</div><div class="t-name">Карточки и данные</div><div class="t-desc">Поверхности, аватары, клавиши.</div></a>
+    </div>
+  </section>
+
+  <footer>
+    <div>Потребители подключают один файл — <code>styles.css</code> — и читают компоненты из <code>window.UniCodeDesignSystem_7662ea</code>.</div>
+    <div class="flag">⚠️ <span><b>Заглушки, требующие подтверждения:</b> шрифты — это замены из Google Fonts, логотип — это плейсхолдер, а иконки используют Lucide. Пришлите реальные ассеты — и я их заменю.</span></div>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var btn = document.getElementById('theme');
+    btn.addEventListener('click', function () {
+      document.documentElement.classList.toggle('dark');
+    });
+  })();
+</script>
+</body>
+</html>

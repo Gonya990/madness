@@ -1,0 +1,46 @@
+<!-- @dsCard group="Components" viewport="700x340" name="Кнопки и действия" subtitle="Основная, вторичная, призрачная, опасная · размеры · иконки-кнопки" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body{ margin:0; padding:22px; background:var(--color-bg); color:var(--color-text); }
+  .d-demo{ display:flex; flex-direction:column; gap:15px; }
+  .d-row{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+  .d-lbl{ font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--color-text-muted); width:78px; flex:0 0 auto; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const NS = window.UniCodeDesignSystem_7662ea;
+const { Button, IconButton } = NS;
+const Row = ({ label, children }) => <div className="d-row"><span className="d-lbl">{label}</span>{children}</div>;
+function Demo() {
+  return (
+    <div className="d-demo">
+      <Row label="Варианты">
+        <Button>Основная</Button>
+        <Button variant="secondary">Вторичная</Button>
+        <Button variant="subtle">Тихая</Button>
+        <Button variant="ghost">Призрачная</Button>
+        <Button variant="danger" leftIcon="trash-2">Удалить</Button>
+      </Row>
+      <Row label="Иконки"><Button leftIcon="play">Запустить</Button><Button variant="secondary" leftIcon="git-branch">main</Button><Button variant="subtle" rightIcon="arrow-up-right">Документация</Button></Row>
+      <Row label="Размеры"><Button size="sm">Маленькая</Button><Button size="md">Средняя</Button><Button size="lg">Большая</Button></Row>
+      <Row label="Состояния"><Button loading>Сохранение</Button><Button disabled>Отключена</Button></Row>
+      <Row label="Кнопка-иконка"><IconButton icon="play" label="Запустить" variant="primary" /><IconButton icon="search" label="Поиск" /><IconButton icon="settings" label="Настройки" variant="subtle" /><IconButton icon="user" label="Аккаунт" variant="outline" round /></Row>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

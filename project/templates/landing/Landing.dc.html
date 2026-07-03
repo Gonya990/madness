@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Лендинг UniCode" description="Маркетинговая посадочная: навигация, герой с кодом, возможности, CTA" -->
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js"></script>
+  <script src="./ds-base.js"></script>
+</helmet>
+
+<div style="font-family:var(--font-sans); color:var(--color-text); background:var(--color-bg); min-height:100%">
+
+  <header style="position:sticky; top:0; z-index:20; border-bottom:1px solid var(--color-border); background:color-mix(in srgb, var(--color-bg) 88%, transparent); backdrop-filter:saturate(1.4) blur(10px)">
+    <div style="max-width:1200px; margin:0 auto; padding:14px 48px; display:flex; align-items:center; gap:32px">
+      <a href="#" style="display:flex; align-items:center; gap:9px; text-decoration:none; color:var(--color-text)">
+        <img src="../../assets/logo-mark.svg" width="30" height="30" alt="UniCode">
+        <span style="font-family:var(--font-display); font-weight:700; font-size:20px; letter-spacing:-0.02em">Uni<span style="color:var(--color-primary)">Code</span></span>
+      </a>
+      <nav style="display:flex; gap:24px">
+        <a href="#" style="color:var(--color-text-secondary); text-decoration:none; font-size:14px; font-weight:500">Продукт</a>
+        <a href="#" style="color:var(--color-text-secondary); text-decoration:none; font-size:14px; font-weight:500">Решения</a>
+        <a href="#" style="color:var(--color-text-secondary); text-decoration:none; font-size:14px; font-weight:500">Цены</a>
+        <a href="#" style="color:var(--color-text-secondary); text-decoration:none; font-size:14px; font-weight:500">Документация</a>
+      </nav>
+      <div style="margin-left:auto; display:flex; align-items:center; gap:8px">
+        <x-import component-from-global-scope="UniCodeDesignSystem_7662ea.Button" variant="ghost" size="sm" hint-size="70px,30px">Войти</x-import>
+        <x-import component-from-global-scope="UniCodeDesignSystem_7662ea.Button" size="sm" right-icon="arrow-right" hint-size="170px,30px">Начать бесплатно</x-import>
+      </div>
+    </div>
+  </header>
+
+  <section style="max-width:1200px; margin:0 auto; padding:64px 48px 48px; display:grid; grid-template-columns:1.02fr 1fr; gap:48px; align-items:center">
+    <div>
+      <div style="margin-bottom:20px">
+        <x-import component-from-global-scope="UniCodeDesignSystem_7662ea.Badge" variant="primary" left-icon="sparkles" hint-size="220px,22px">Новое — AI-ассистент</x-import>
+      </div>
+      <h1 style="font-family:var(--font-display); font-size:58px; line-height:1.04; letter-spacing:-0.03em; font-weight:700; margin:0 0 20px">Пиши, запускай и <span style="color:var(--color-primary)">деплой</span> код — откуда угодно</h1>
+      <p style="font-size:18px; line-height:1.6; color:var(--color-text-secondary); max-width:34em; margin:0 0 28px">UniCode — браузерная среда для разработки. Откройте редактор в один клик, запустите любой стек и выкатывайте в продакшен вместе с командой.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap">
+        <x-import component-from-global-scope="UniCodeDesignSystem_7662ea.Button" size="lg" left-icon="play" hint-size="220px,46px">Открыть редактор</x-import>
+        <x-import component-from-global-scope="UniCodeDesignSystem_7662ea.Button" size="lg" variant="secondary" left-icon="github" hint-size="220px,46px">Войти через GitHub</x-import>
+      </div>
+    </div>
+    <div style="background:#15110C; border-radius:16px; box-shadow:var(--shadow-2xl); overflow:hidden">
+      <div style="display:flex; align-items:center; gap:7px; padding:12px 14px; background:#1d1710">
+        <span style="width:11px; height:11px; border-radius:50%; background:#F4522D"></span>
+        <span style="width:11px; height:11px; border-radius:50%; background:#E8A23D"></span>
+        <span style="width:11px; height:11px; border-radius:50%; background:#1F9D55"></span>
+        <span style="margin-left:8px; font-size:12px; color:#9b8e79; font-family:var(--font-mono)">server.ts</span>
+      </div>
+      <pre style="margin:0; padding:20px 22px; font-family:var(--font-mono); font-size:14.5px; line-height:1.75; color:#EAE0CE; overflow:auto"><span style="color:#6e6149">// деплой в один шаг</span>
+<span style="color:var(--coral-400)">import</span> { serve } <span style="color:var(--coral-400)">from</span> <span style="color:var(--green-400)">'@unicode/sdk'</span>;
+
+<span style="color:var(--blue-300)">serve</span>({ port: <span style="color:#b7a98f">8080</span> }, <span style="color:var(--coral-400)">async</span> (req) => {
+  <span style="color:var(--coral-400)">const</span> user = <span style="color:var(--coral-400)">await</span> db.<span style="color:var(--blue-300)">find</span>(req.id);
+  <span style="color:var(--coral-400)">return</span> Response.<span style="color:var(--blue-300)">json</span>(user);
+});</pre>
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:11px 16px; background:#1d1710; border-top:1px solid #2a2018; font-family:var(--font-mono); font-size:12px">
+        <span style="color:var(--green-400)">✓ Развёрнуто за 4.2с</span>
+        <span style="color:#9b8e79">uni.dev/acme</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1200px; margin:0 auto; padding:56px 48px">
+    <div style="text-align:center; max-width:620px; margin:0 auto 44px">
+      <p style="font-family:var(--font-mono); font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-muted); margin:0 0 14px">Возможности</p>
+      <h2 style="font-family:var(--font-display); font-size:38px; letter-spacing:-0.025em; font-weight:700; margin:0 0 14px">Всё для разработки — в одной вкладке</h2>
+      <p style="font-size:17px; color:var(--color-text-secondary); margin:0; line-height:1.5">От первой строки кода до продакшена. Без локального окружения и настройки.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px">
+      <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:16px; padding:24px; box-shadow:var(--shadow-xs)">
+        <div style="width:46px; height:46px; border-radius:12px; background:var(--color-primary-subtle); color:var(--color-primary); display:flex; align-items:center; justify-content:center; margin-bottom:16px"><i data-lucide="mouse-pointer-click"></i></div>
+        <h3 style="font-family:var(--font-display); font-size:18px; font-weight:700; margin:0 0 7px; letter-spacing:-0.01em">Редактор в один клик</h3>
+        <p style="font-size:14px; color:var(--color-text-secondary); line-height:1.55; margin:0">Полноценная IDE в браузере — без установки. Дерево файлов, терминал, live-превью.</p>
+      </div>
+      <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:16px; padding:24px; box-shadow:var(--shadow-xs)">
+        <div style="width:46px; height:46px; border-radius:12px; background:var(--color-primary-subtle); color:var(--color-primary); display:flex; align-items:center; justify-content:center; margin-bottom:16px"><i data-lucide="users"></i></div>
+        <h3 style="font-family:var(--font-display); font-size:18px; font-weight:700; margin:0 0 7px; letter-spacing:-0.01em">Совместная работа</h3>
+        <p style="font-size:14px; color:var(--color-text-secondary); line-height:1.55; margin:0">Пишите код вместе в реальном времени. Курсоры, комментарии и ревью — встроены.</p>
+      </div>
+      <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:16px; padding:24px; box-shadow:var(--shadow-xs)">
+        <div style="width:46px; height:46px; border-radius:12px; background:var(--color-primary-subtle); color:var(--color-primary); display:flex; align-items:center; justify-content:center; margin-bottom:16px"><i data-lucide="rocket"></i></div>
+        <h3 style="font-family:var(--font-display); font-size:18px; font-weight:700; margin:0 0 7px; letter-spacing:-0.01em">Деплой в один шаг</h3>
+        <p style="font-size:14px; color:var(--color-text-secondary); line-height:1.55; margin:0">Из редактора в продакшен за секунды. Превью-окружения на каждый пуш.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:0 48px 64px">
+    <div style="max-width:1100px; margin:0 auto; background:linear-gradient(135deg, #2a2018, #15110C); border-radius:24px; padding:56px 40px; text-align:center; color:#fff">
+      <h2 style="font-family:var(--font-display); font-size:38px; letter-spacing:-0.025em; font-weight:700; margin:0 0 10px">Откройте редактор. Прямо сейчас.</h2>
+      <p style="font-size:17px; color:#cbbfa6; margin:0 0 26px">Бесплатный тариф навсегда. Карта не нужна.</p>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap">
+        <x-import component-from-global-scope="UniCodeDesignSystem_7662ea.Button" size="lg" left-icon="play" hint-size="220px,46px">Начать бесплатно</x-import>
+        <x-import component-from-global-scope="UniCodeDesignSystem_7662ea.Button" size="lg" variant="secondary" right-icon="arrow-up-right" hint-size="230px,46px">Связаться с продажами</x-import>
+      </div>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    let tries = 0;
+    const paint = () => {
+      if (window.lucide && window.lucide.createIcons) { try { window.lucide.createIcons(); } catch (e) {} }
+      if (tries++ < 30) setTimeout(paint, 120);
+    };
+    paint();
+  }
+}
+</script>
+</body>
+</html>

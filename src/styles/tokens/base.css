@@ -1,0 +1,49 @@
+/* ============================================================
+   UniCode — Base reset & element defaults
+   Intentionally light so it composes into consumer apps.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--coral-200);
+  color: var(--coral-900);
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+a:hover { color: var(--color-link-hover); }
+
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+  font-feature-settings: "liga" 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  margin: 0;
+}

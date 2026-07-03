@@ -1,0 +1,49 @@
+<!-- @dsCard group="Brand" viewport="700x260" name="Логотип" subtitle="Лого-замок, знак и логотип-текст · светлый + тёмный" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body{ margin:0; padding:22px; background:var(--color-bg); color:var(--color-text); }
+  .d-demo{ display:flex; flex-direction:column; gap:16px; }
+  .d-row{ display:flex; align-items:center; gap:28px; flex-wrap:wrap; }
+  .d-panel{ display:flex; align-items:center; gap:28px; padding:18px 22px; border-radius:var(--radius-lg); }
+  .d-light{ background:var(--color-surface); border:1px solid var(--color-border); }
+  .d-dark{ background:#1A1611; }
+  .d-cap{ font-family:var(--font-mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--color-text-muted); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const NS = window.UniCodeDesignSystem_7662ea;
+const { Logo } = NS;
+function Demo() {
+  return (
+    <div className="d-demo">
+      <div className="d-row">
+        <div className="d-panel d-light"><Logo size={34} /></div>
+        <div className="d-panel d-dark"><div className="dark"><Logo size={34} /></div></div>
+      </div>
+      <div className="d-row">
+        <span className="d-cap">Знак</span>
+        <Logo variant="mark" size={20} />
+        <Logo variant="mark" size={28} />
+        <Logo variant="mark" size={40} />
+        <Logo variant="mark" size={52} />
+        <span className="d-cap" style={{ marginLeft: 24 }}>Текст</span>
+        <Logo variant="wordmark" size={26} />
+      </div>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<svg width="212" height="48" viewBox="0 0 212 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="UniCode">
+  <rect width="48" height="48" rx="11" fill="#F4522D"></rect>
+  <path d="M13.5 16.5 L21.75 24 L13.5 31.5" stroke="#FFFFFF" stroke-width="4.1" stroke-linecap="round" stroke-linejoin="round"></path>
+  <rect x="24" y="28.1" width="10.5" height="3.75" rx="1.9" fill="#FFFFFF"></rect>
+  <text x="62" y="32.5" font-family="&#39;Space Grotesk&#39;, ui-sans-serif, sans-serif" font-size="27" font-weight="700" letter-spacing="-0.6" fill="#F3ECDD">Uni<tspan fill="#F4522D">Code</tspan></text>
+</svg>
