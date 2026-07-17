@@ -21,7 +21,7 @@ function RouteFallback() {
 
 export function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <React.Suspense fallback={<RouteFallback />}>
         <Routes>
           <Route path="/" element={<Home />} />

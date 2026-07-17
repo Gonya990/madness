@@ -42,4 +42,4 @@ DESIGN.md         полный дизайн-гайд (визуальные ос�
 
 ## Стек
 
-Vite 5 · React 18 · TypeScript 5 · React Router 6 · lucide-react
+Vite 6 · React 18 · TypeScript 5 · React Router 6 · lucide-react
